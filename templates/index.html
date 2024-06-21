@@ -44,7 +44,10 @@
                         </div>
                         <div class="col-md-10 form-group" style="text-align: center">
                             <label><b>Select the model:</b> </label><br>
-                            <select class="selectpicker form-control" id="car_models" name="car_models" required="1">
+                            <select class="selectpicker form-control" id="name" name="name" required="1">
+                                {% for model in car_models %}
+                                <option value="{{ model }}">{{ model }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="col-md-10 form-group" style="text-align: center">
@@ -91,16 +94,30 @@
             console.log(company.value);
             car_model.value = "";
             car_model.innerHTML = "";
+
+            for (var i = 0; i < companies.length; i++) {
+                if (companies[i].value == company.value) {
+                    for (var j = 0; j < car_models.length; j++) {
+                        if (companies[i].value == car_models[j].company) {
+                            var newOption = document.createElement("option");
+                            newOption.value = car_models[j].value;
+                            newOption.innerHTML = car_models[j].value;
+                            car_model.options.add(newOption);
+                        }
+                    }
+                }
+            }
+
             // {% for company in companies %}
             // if (company.value == "{{ company }}") {
             //     {% for model in car_models %}
-            //     {% if company in model %}
+            //         {% if company in model %}
 
-            //     var newOption = document.createElement("option");
-            //     newOption.value = "{{ model }}";
-            //     newOption.innerHTML = "{{ model }}";
-            //     car_model.options.add(newOption);
-            //     {% endif %}
+            //         var newOption = document.createElement("option");
+            //         newOption.value = "{{ model }}";
+            //         newOption.innerHTML = "{{ model }}";
+            //         car_model.options.add(newOption);
+            //         {% endif %}
             //     {% endfor %}
             // }
             // {% endfor %}
