@@ -11,7 +11,7 @@ car=pd.read_csv('Cleaned_Car_data.csv')
 
 @app.route('/',methods=['GET','POST'])
 def index():
-    return "Welcome to Car Price Prediction"
+    return render_template('index.html')
 
 if __name__=='__main__':
     app.run(debug=True)
